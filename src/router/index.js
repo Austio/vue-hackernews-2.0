@@ -8,7 +8,7 @@ const createListView = id => () => import('../views/CreateListView').then(m => m
 const ItemView = () => import('../views/ItemView.vue')
 const UserView = () => import('../views/UserView.vue')
 const ErrorExample = () => import('../views/ErrorExample.vue')
-const ErrorComponents = () => import('../components/errorComponents/index.vue')
+const ErrorComponents = () => import('../components/errorComponents/ErrorList.vue')
 
 export function createRouter () {
   return new Router({
