@@ -22,7 +22,7 @@
         items: [
             {
               id: 1,
-              primary: null,
+              primary: false,
             },
            {
              id: 2,
