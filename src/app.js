@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueApollo from 'vue-apollo'
 import { createStore } from './store'
 import { createRouter } from './router'
+import { createApolloClient } from './apollo';
 import { sync } from 'vuex-router-sync'
 import titleMixin from './util/title'
 import * as filters from './util/filters'
@@ -25,13 +27,20 @@ export function createApp () {
   // this registers `store.state.route`
   sync(store, router)
 
+  // setup vue apollo
+  const apolloClient = createApolloClient()
+  const apolloProvider = new VueApollo({
+    defaultClient: apolloClient,
+  })
+
   // create the app instance.
   // here we inject the router, store and ssr context to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = new Vue({
     router,
     store,
-    render: h => h(App)
+    render: h => h(App),
+    provide: apolloProvider.provide(),
   })
 
   // expose the app, the router and the store.
