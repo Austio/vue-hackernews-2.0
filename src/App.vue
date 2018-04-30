@@ -12,14 +12,28 @@
         <router-link to="/job">Jobs</router-link>
         <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank" rel="noopener">
           Built with Vue.js
+          Me value is "{{ lookup }}"
         </a>
       </nav>
     </header>
+
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
   </div>
 </template>
+
+<script>
+  export default {
+    name: 'App',
+    data() {
+      return {
+        lookup: null,
+      };
+    },
+  }
+
+</script>
 
 <style lang="stylus">
 body

@@ -1,5 +1,7 @@
 <template>
   <div class="news-view">
+
+    {{ lookup }}
     <div class="news-list-nav">
       <router-link v-if="page > 1" :to="'/' + type + '/' + (page - 1)">&lt; prev</router-link>
       <a v-else class="disabled">&lt; prev</a>
@@ -22,6 +24,19 @@
 import { watchList } from '../api'
 import Item from '../components/Item.vue'
 
+
+import gql from 'graphql-tag';
+
+const query = gql`{
+  lookup {
+    artist(mbid: "5b11f4ce-a62d-471e-81fc-a69a8278c7da") {
+      name
+    }
+  }
+}
+`;
+
+
 export default {
   name: 'item-list',
 
@@ -37,10 +52,17 @@ export default {
     return {
       transition: 'slide-right',
       displayedPage: Number(this.$route.params.page) || 1,
-      displayedItems: this.$store.getters.activeItems
+      displayedItems: this.$store.getters.activeItems,
+      lookup: null,
     }
   },
 
+  apollo: {
+    lookup: {
+      query,
+      prefetch: true,
+    }
+  },
   computed: {
     page () {
       return Number(this.$route.params.page) || 1

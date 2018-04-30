@@ -22,7 +22,7 @@ Vue.mixin({
   }
 })
 
-const { app, router, store } = createApp()
+const { app, router, store, apolloProvider } = createApp()
 
 // prime the store with server-initialized state.
 // the state is determined during SSR and inlined in the page markup.
